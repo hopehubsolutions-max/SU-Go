@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SU-Go · Notes, Plans &amp; Airport Rides — for Maties</title>
+
+<!-- ============================================================
+     SU-GO  ·  v1   ·   by HopeVision Innovations
+     ------------------------------------------------------------
+     QUICK-EDIT GUIDE (search for these CAPS words in the code):
+       WEB3FORMS_KEY   -> ec01ebdf-b77f-4745-8c5f-dd36c4359164
+       ADMIN_EMAIL     -> nuttymantutle2@gmail.com
+       ADMIN_PASSWORD  -> Tsepo123#
+       MY_WHATSAPP     -> +26663301566
+       const DRIVERS   -> add / remove your airport drivers here
+       PRICES          -> the numbers in the pricing section
+     IMAGES used (keep these files in the SAME folder as this page):
+       logo.png · campus-wide.png · student-stress.png ·
+       airport.png · campus-steps.jpg
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --maroon:#6b1620; --maroon-deep:#4a0e16; --maroon-ink:#22070a;
+    --gold:#d9b876; --gold-bright:#ecca84; --cream:#f4e7cd; --cream-soft:#f9f1e0;
+    --paper:#fbf6ec; --navy:#152238; --shadow:rgba(34,7,10,.35); --r:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--maroon-ink);line-height:1.55;overflow-x:hidden}
+  h1,h2,h3,h4,.display{font-family:'Fraunces',serif}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  .gold{color:var(--gold-bright)}
+  .hidden{display:none !important}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;background:rgba(74,14,22,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(217,184,118,.25)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:'Fraunces',serif;font-weight:900;font-size:1.5rem;color:var(--cream);letter-spacing:.5px}
+  .brand img{height:42px;width:auto;border-radius:6px}
+  .brand b{color:var(--gold-bright)}
+  .nav-links{display:flex;align-items:center;gap:26px}
+  .nav-links a{color:var(--cream);font-size:.93rem;font-weight:500;opacity:.85;transition:opacity .2s}
+  .nav-links a:hover{opacity:1}
+  .btn{font-family:'Outfit',sans-serif;font-weight:600;font-size:.95rem;padding:11px 22px;border-radius:999px;border:none;cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+  .btn:active{transform:translateY(1px)}
+  .btn-gold{background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:var(--maroon-ink);box-shadow:0 4px 16px rgba(217,184,118,.35)}
+  .btn-gold:hover{box-shadow:0 6px 22px rgba(217,184,118,.5)}
+  .btn-ghost{background:transparent;color:var(--cream);border:1.5px solid rgba(244,231,205,.4)}
+  .btn-ghost:hover{border-color:var(--gold-bright);color:var(--gold-bright)}
+  .btn-wa{background:#25D366;color:#fff;box-shadow:0 4px 16px rgba(37,211,102,.3)}
+  .btn-wa:hover{background:#1eb955}
+  .btn-block{width:100%;padding:14px;font-size:1rem}
+  @media(max-width:760px){.nav-links a{display:none}}
+
+  /* HERO */
+  header.hero{position:relative;color:var(--cream);padding:96px 0 110px;overflow:hidden;
+    background:linear-gradient(to bottom,transparent 60%,rgba(34,7,10,.55) 82%,var(--maroon-ink) 100%),linear-gradient(160deg,rgba(74,14,22,.58),rgba(34,7,10,.7)),url('campus-wide.png');
+    background-size:cover;background-position:center}
+  .hero::after{content:"";position:absolute;inset:0;opacity:.05;pointer-events:none;background-image:repeating-linear-gradient(45deg,#fff 0 2px,transparent 2px 9px)}
+  .hero::before{content:"";position:absolute;top:-15%;right:-5%;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(217,184,118,.25),transparent 65%);pointer-events:none}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;position:relative;z-index:2}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold-bright);margin-bottom:20px;border:1px solid rgba(217,184,118,.4);padding:6px 14px;border-radius:999px}
+  .hero h1{font-size:clamp(2.4rem,5vw,4.1rem);font-weight:900;line-height:1.02;letter-spacing:-1px}
+  .hero h1 em{font-style:italic;color:var(--gold-bright)}
+  .hero p.lead{font-size:1.18rem;opacity:.92;margin:22px 0 32px;max-width:520px;font-weight:300}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-card{background:rgba(251,246,236,.07);border:1px solid rgba(217,184,118,.3);border-radius:var(--r);padding:30px;backdrop-filter:blur(6px)}
+  .hero-card h3{font-size:1.15rem;color:var(--gold-bright);margin-bottom:6px}
+  .pain{display:flex;gap:12px;align-items:flex-start;margin-top:16px;font-size:.96rem}
+  .pain span{color:var(--gold-bright);font-weight:900;font-size:1.1rem;line-height:1.3}
+  @media(max-width:880px){.hero-grid{grid-template-columns:1fr}.hero{padding:64px 0 80px}}
+
+  /* STRIP */
+  .strip{background:var(--maroon-ink);color:var(--cream);padding:18px 0;font-size:.9rem}
+  .strip .wrap{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;opacity:.85;letter-spacing:.5px}
+  .strip b{color:var(--gold-bright)}
+
+  /* SECTIONS */
+  section{padding:90px 0;position:relative}
+  #features{background:linear-gradient(180deg,var(--maroon-ink) 0%,rgba(34,7,10,0) 7%),radial-gradient(circle at 12% 8%,rgba(217,184,118,.16),transparent 42%),radial-gradient(circle at 92% 96%,rgba(107,22,32,.08),transparent 46%),var(--paper)}
+  .sec-head{text-align:center;max-width:660px;margin:0 auto 54px}
+  .sec-head .kick{color:var(--maroon);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.8rem}
+  .sec-head h2{font-size:clamp(2rem,4vw,2.9rem);font-weight:900;margin:10px 0 14px;color:var(--maroon)}
+  .sec-head p{font-size:1.08rem;color:#5a3b3f}
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .card{background:#fff;border:1px solid #ecddc3;border-radius:var(--r);padding:32px;box-shadow:0 10px 30px rgba(107,22,32,.06);transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;top:0;left:0;width:100%;height:5px;background:linear-gradient(90deg,var(--maroon),var(--gold))}
+  .card:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(107,22,32,.14)}
+  .card .ico{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,var(--maroon),var(--maroon-deep));display:grid;place-items:center;font-size:1.6rem;margin-bottom:18px;color:var(--gold-bright)}
+  .card h3{font-size:1.4rem;color:var(--maroon);margin-bottom:10px;font-weight:600}
+  .card p{color:#5a3b3f;font-size:.97rem}
+  .card ul{list-style:none;margin-top:14px}
+  .card li{padding:6px 0 6px 24px;position:relative;font-size:.93rem;color:#4a2c30}
+  .card li::before{content:"✦";position:absolute;left:0;color:var(--gold);font-size:.8rem;top:7px}
+  @media(max-width:880px){.cards{grid-template-columns:1fr}}
+
+  /* SPLIT IMAGE BANDS */
+  .band{position:relative;color:var(--cream);overflow:hidden}
+  .band .wrap{position:relative;z-index:2;padding:90px 24px}
+  .band-notes{background:linear-gradient(180deg,var(--paper) 0%,rgba(251,246,236,0) 20%,rgba(249,241,224,0) 80%,var(--cream-soft) 100%),linear-gradient(90deg,rgba(34,7,10,.84) 0%,rgba(74,14,22,.46) 50%,rgba(74,14,22,.05) 100%),url('student-stress.png');background-size:cover;background-position:center right}
+  .band h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;max-width:560px;line-height:1.05}
+  .band h2 em{color:var(--gold-bright);font-style:italic}
+  .band p{max-width:480px;margin:18px 0 26px;font-size:1.1rem;opacity:.9;font-weight:300}
+
+  /* AIRPORT */
+  #airport{background:radial-gradient(circle at 80% 10%,rgba(217,184,118,.18),transparent 45%),linear-gradient(180deg,var(--cream-soft),#fff 55%,var(--cream-soft))}
+  .airport-hero{margin-bottom:40px;position:relative}
+  .airport-hero img{width:100%;display:block;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 8%,#000 88%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 8%,#000 88%,transparent 100%)}
+  .airport-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+  .airport-grid .txt h2{color:var(--navy);font-size:clamp(1.9rem,4vw,2.7rem);font-weight:900;line-height:1.05}
+  .airport-grid .txt h2 em{color:var(--gold);font-style:italic}
+  .airport-grid .txt p{color:#3a4a63;font-size:1.05rem;margin:16px 0}
+  .mini-feats{display:flex;gap:22px;flex-wrap:wrap;margin-top:18px}
+  .mini-feats div{font-size:.9rem;color:var(--navy);font-weight:600;display:flex;align-items:center;gap:8px}
+  @media(max-width:880px){.airport-grid{grid-template-columns:1fr}}
+
+  /* PRICING */
+  #pricing{background:linear-gradient(180deg,#fff,var(--cream-soft))}
+  .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .price{background:#fff;border:1px solid #ecddc3;border-radius:16px;padding:26px 20px;text-align:center;transition:transform .2s,border-color .2s}
+  .price:hover{transform:translateY(-5px);border-color:var(--gold)}
+  .price .pages{font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--maroon)}
+  .price .amt{font-family:'Fraunces',serif;font-size:2.3rem;font-weight:900;color:var(--maroon-ink);margin:8px 0}
+  .price .note{font-size:.82rem;color:#7a5c60}
+  .price.feat{background:linear-gradient(160deg,var(--maroon),var(--maroon-deep));color:var(--cream)}
+  .price.feat .pages,.price.feat .amt{color:var(--gold-bright)}
+  .price.feat .note{color:rgba(244,231,205,.75)}
+  .price-foot{text-align:center;margin-top:26px;color:#5a3b3f;font-size:.95rem}
+  @media(max-width:760px){.price-grid{grid-template-columns:1fr 1fr}}
+
+  /* HOW */
+  #how{background:linear-gradient(180deg,var(--cream-soft) 0%,rgba(249,241,224,0) 16%,rgba(34,7,10,0) 78%,var(--maroon-ink) 100%),linear-gradient(160deg,rgba(74,14,22,.9),rgba(34,7,10,.95)),url('campus-steps.jpg');background-size:cover;background-position:center;color:var(--cream)}
+  #how .sec-head h2{color:var(--cream)} #how .sec-head .kick{color:var(--gold-bright)}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:s}
+  .step{text-align:center;padding:10px}
+  .step .n{counter-increment:s;width:52px;height:52px;border-radius:50%;background:var(--gold);color:var(--maroon-ink);display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:900;font-size:1.4rem;margin:0 auto 16px;box-shadow:0 6px 18px var(--shadow)}
+  .step .n::before{content:counter(s)}
+  .step h4{font-size:1.1rem;color:var(--gold-bright);margin-bottom:6px}
+  .step p{font-size:.92rem;opacity:.88}
+  @media(max-width:760px){.steps{grid-template-columns:1fr 1fr}}
+
+  /* FOOTER */
+  footer{background:var(--maroon-ink);color:var(--cream);padding:56px 0 30px}
+  .foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-start}
+  footer h4{font-family:'Fraunces',serif;color:var(--gold-bright);font-size:1.4rem;margin-bottom:6px}
+  footer p{opacity:.82;font-size:.92rem;max-width:340px}
+  .foot-col b{color:var(--gold-bright)}
+  .foot-col .line{font-size:.9rem;opacity:.85;margin-top:4px}
+  .disclaimer{border-top:1px solid rgba(217,184,118,.2);margin-top:34px;padding-top:22px;font-size:.78rem;opacity:.62;line-height:1.6;max-width:900px}
+  .foot-bottom{text-align:center;font-size:.82rem;opacity:.55;margin-top:20px}
+
+  /* MODAL */
+  .overlay{position:fixed;inset:0;background:rgba(34,7,10,.62);backdrop-filter:blur(4px);z-index:100;display:grid;place-items:center;padding:20px}
+  .modal{background:var(--paper);border-radius:22px;max-width:440px;width:100%;padding:36px;box-shadow:0 30px 70px rgba(0,0,0,.4);position:relative;animation:pop .25s ease;max-height:92vh;overflow:auto}
+  @keyframes pop{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
+  .modal .x{position:absolute;top:16px;right:20px;font-size:1.5rem;cursor:pointer;color:#9a6b70;background:none;border:none}
+  .modal h2{color:var(--maroon);font-size:1.7rem;font-weight:900;margin-bottom:4px}
+  .modal .sub{color:#7a5c60;font-size:.95rem;margin-bottom:22px}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:.82rem;font-weight:600;color:var(--maroon);margin-bottom:5px}
+  .field input,.field select,.field textarea{width:100%;padding:12px 14px;border:1.5px solid #e0cdb0;border-radius:11px;font-family:'Outfit',sans-serif;font-size:.97rem;background:#fff;transition:border-color .2s}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .tabs{display:flex;gap:8px;margin-bottom:22px;background:#efe2cc;padding:5px;border-radius:12px}
+  .tabs button{flex:1;padding:10px;border:none;background:none;border-radius:9px;font-weight:600;cursor:pointer;color:#7a5c60;font-family:'Outfit'}
+  .tabs button.on{background:#fff;color:var(--maroon);box-shadow:0 2px 6px rgba(0,0,0,.08)}
+  .msg{padding:11px 14px;border-radius:10px;font-size:.88rem;margin-bottom:14px}
+  .msg.err{background:#fbe3e3;color:#9b1c1c}
+  .msg.ok{background:#e3f5e8;color:#1c7a3a}
+  .small-link{font-size:.85rem;color:var(--maroon);text-align:center;margin-top:14px;cursor:pointer}
+  .small-link:hover{text-decoration:underline}
+
+  /* DASHBOARD */
+  #dash{display:none;min-height:100vh;background:var(--paper)}
+  .dash-top{background:var(--maroon);color:var(--cream)}
+  .dash-top .nav-inner{height:74px}
+  .dash-hi{font-size:.85rem;opacity:.85}
+  .dash-hi b{color:var(--gold-bright);font-weight:600}
+  .dash-body{padding:42px 0 80px}
+  .dash-tabs{display:flex;gap:10px;margin-bottom:30px;flex-wrap:wrap}
+  .dash-tabs button{padding:12px 20px;border-radius:999px;border:1.5px solid #e0cdb0;background:#fff;font-weight:600;cursor:pointer;color:var(--maroon);font-family:'Outfit'}
+  .dash-tabs button.on{background:var(--maroon);color:var(--cream);border-color:var(--maroon)}
+  .panel{background:#fff;border:1px solid #ecddc3;border-radius:var(--r);padding:34px;box-shadow:0 10px 30px rgba(107,22,32,.06)}
+  .panel h2{color:var(--maroon);font-size:1.7rem;margin-bottom:6px}
+  .panel .pdesc{color:#5a3b3f;margin-bottom:24px}
+  .drop{border:2.5px dashed #d8bf95;border-radius:16px;padding:38px 20px;text-align:center;cursor:pointer;transition:.2s;background:var(--cream-soft)}
+  .drop.drag{border-color:var(--maroon);background:#f6ecd8}
+  .drop .big{font-size:2.4rem;margin-bottom:8px}
+  .drop p{color:#7a5c60;font-size:.95rem}.drop b{color:var(--maroon)}
+  .filelist{margin-top:14px}
+  .fileitem{display:flex;justify-content:space-between;align-items:center;background:var(--cream-soft);border:1px solid #e7d6b8;border-radius:10px;padding:9px 14px;font-size:.9rem;margin-bottom:8px}
+  .fileitem button{background:none;border:none;color:#9b1c1c;cursor:pointer;font-size:1.1rem}
+  .style-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+  .style-opt{border:1.5px solid #e0cdb0;border-radius:12px;padding:14px;cursor:pointer;transition:.2s;background:#fff}
+  .style-opt:hover{border-color:var(--gold)}
+  .style-opt.sel{border-color:var(--maroon);background:#fbf2e1;box-shadow:0 0 0 1px var(--maroon) inset}
+  .style-opt b{color:var(--maroon);display:block;margin-bottom:3px}.style-opt span{font-size:.84rem;color:#7a5c60}
+  .confid{display:flex;gap:12px;align-items:flex-start;background:#f0f8f1;border:1px solid #cce8d2;border-radius:12px;padding:14px 16px;margin:22px 0;font-size:.9rem;color:#2c6b3c}
+  .confid .lock{font-size:1.3rem}
+  .notice{display:flex;gap:12px;align-items:flex-start;background:#fff7e6;border:1px solid #f0dca0;border-radius:12px;padding:14px 16px;margin:0 0 22px;font-size:.86rem;color:#7a5c1c}
+  .admin-user{display:flex;justify-content:space-between;padding:12px 16px;border:1px solid #ecddc3;border-radius:10px;margin-bottom:8px;font-size:.92rem;background:#fff}
+  .admin-user b{color:var(--maroon)}
+  /* driver cards */
+  .driver-list{display:grid;gap:12px;margin-top:8px}
+  .driver{display:flex;align-items:center;gap:14px;border:1.5px solid #e0cdb0;border-radius:14px;padding:14px 16px;background:#fff;cursor:pointer;transition:.2s}
+  .driver:hover{border-color:var(--gold)}
+  .driver.sel{border-color:var(--maroon);background:#fbf2e1;box-shadow:0 0 0 1px var(--maroon) inset}
+  .avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--maroon),var(--maroon-deep));color:var(--gold-bright);display:grid;place-items:center;font-family:'Fraunces';font-weight:900;font-size:1.2rem;flex-shrink:0;background-size:cover;background-position:center}
+  .driver .info{flex:1}
+  .driver .info b{color:var(--maroon-ink);font-size:1.05rem}
+  .driver .info span{display:block;font-size:.85rem;color:#7a5c60}
+  .driver .pick{font-size:.8rem;font-weight:700;color:var(--maroon);border:1.5px solid var(--maroon);border-radius:999px;padding:6px 14px}
+  .driver.sel .pick{background:var(--maroon);color:#fff}
+  @media(max-width:760px){.row2{grid-template-columns:1fr}.style-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ===================== PUBLIC SITE ===================== -->
+<div id="site">
+  <nav>
+    <div class="wrap nav-inner">
+      <a href="#" class="brand"><img src="logo.png" alt="SU-Go" onerror="this.style.display='none'">SU-<b>Go</b></a>
+      <div class="nav-links">
+        <a href="#features">What we do</a>
+        <a href="#airport">Airport rides</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#how">How it works</a>
+        <button class="btn btn-gold" onclick="openAuth('login')">Log in</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">★ Made in Stellenbosch, for Maties</span>
+        <h1>Less stress.<br>More <em>marks</em>.<br>Smoother <em>rides</em>.</h1>
+        <p class="lead">Drowning in notes? Need a plan? Heading to the airport? SU-Go is the student-only hub that sorts your notes, builds your study schedule, and links you with fellow students driving to the airport. Your journey, your way.</p>
+        <div class="hero-cta">
+          <button class="btn btn-gold" onclick="openAuth('register')">Get started →</button>
+          <a href="#airport" class="btn btn-ghost">Book an airport ride</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Real talk 👀</h3>
+        <p style="opacity:.85;font-size:.95rem">Exams in 14 days, syllabus not done, flight home next week. We feel you.</p>
+        <div class="pain"><span>✓</span><div>Notes summarised <b>your way</b> — short, detailed, or exam-cram.</div></div>
+        <div class="pain"><span>✓</span><div>A clean <b>study plan</b> with proper breaks.</div></div>
+        <div class="pain"><span>✓</span><div>Linked to a <b>fellow student</b> driving to the airport.</div></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="strip">
+    <div class="wrap">
+      <span>🎓 For students, <b>by students</b></span>
+      <span>📍 Based in <b>Stellenbosch</b></span>
+      <span>⚡ <b>Fast</b> turnaround</span>
+      <span>🔒 <b>Private</b> &amp; student-only</span>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kick">What SU-Go does</span>
+        <h2>Three tools. One mission: your time back.</h2>
+        <p>Pick what you need — or use all three. Built for the weeks when you've got zero time to spare.</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="ico">📚</div>
+          <h3>Crush My Notes</h3>
+          <p>Upload as many pages as you want, tell us how you like them, get them back digestible.</p>
+          <ul><li>Short &amp; sharp, or detailed but easy</li><li>Exam-cram: defs, formulas, likely Qs</li><li>Structured so it actually sticks</li><li>Private — never made public</li></ul>
+          <button class="btn btn-gold btn-block" style="margin-top:20px" onclick="openAuth('register')">Send my notes</button>
+        </div>
+        <div class="card">
+          <div class="ico">🗓️</div>
+          <h3>Plan My Grind</h3>
+          <p>Drop your timetable or tell us what you're studying. We build a clean schedule with smart breaks.</p>
+          <ul><li>Study blocks that match your energy</li><li>Rest built in so you don't burn out</li><li>Counts down to exam dates</li><li>Simple &amp; realistic</li></ul>
+          <button class="btn btn-gold btn-block" style="margin-top:20px" onclick="openAuth('register')">Build my plan</button>
+        </div>
+        <div class="card">
+          <div class="ico">✈️</div>
+          <h3>Ride to Airport</h3>
+          <p>Heading home for the break? Pick your travel time and a fellow student driver. We make the intro.</p>
+          <ul><li>Choose your driver &amp; car</li><li>Set your date &amp; flight time</li><li>Driver gets pinged on WhatsApp</li><li>Student-to-student, your way</li></ul>
+          <button class="btn btn-gold btn-block" style="margin-top:20px" onclick="openAuth('register')">Find a ride</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTES BAND (uses student-stress.png) -->
+  <div class="band band-notes">
+    <div class="wrap">
+      <h2>Tired of <em>endless</em> notes at 2am?</h2>
+      <p>Got a full plate and just wanna compress the whole module and consume it in one sitting? That's literally what we do. Turn the chaos into clarity.</p>
+      <button class="btn btn-gold" onclick="openAuth('register')">Crush my notes →</button>
+    </div>
+  </div>
+
+  <!-- AIRPORT (uses airport.png) -->
+  <section id="airport">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kick">Airport rides</span>
+        <h2>Stellenbosch ✈️ Airport — your way.</h2>
+        <p>You're already making the trip home. We just bring a few trusted student drivers together so you can pick one that suits you.</p>
+      </div>
+      <div class="airport-hero">
+        <img src="airport.png" alt="Stellenbosch to Airport — smart rides for students">
+      </div>
+      <div class="airport-grid">
+        <div class="txt">
+          <h2>You choose. <em>They drive.</em></h2>
+          <p>Set your travel date and flight time, browse the available student drivers, and pick the one you like. The driver gets your request straight to their WhatsApp and confirms with you directly.</p>
+          <div class="mini-feats">
+            <div>🛡️ Student-to-student</div>
+            <div>📅 You set the time</div>
+            <div>💬 Direct WhatsApp link</div>
+          </div>
+        </div>
+        <div>
+          <button class="btn btn-gold btn-block" style="font-size:1.1rem;padding:18px" onclick="openAuth('register')">Book your ride →</button>
+          <p style="text-align:center;font-size:.85rem;color:#7a5c60;margin-top:12px">Sign in with your student details to get started.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kick">Pricing</span>
+        <h2>Pay for the pages, not the panic.</h2>
+        <p>Notes are priced by how much there is to summarise. (Suggested rates — easy to adjust.)</p>
+      </div>
+      <!-- EDIT PRICES HERE -->
+      <div class="price-grid">
+        <div class="price"><div class="pages">1–5 pages</div><div class="amt">R30</div><div class="note">Quick win · single topic</div></div>
+        <div class="price feat"><div class="pages">6–15 pages</div><div class="amt">R60</div><div class="note">Most popular · a chapter</div></div>
+        <div class="price"><div class="pages">16–30 pages</div><div class="amt">R100</div><div class="note">A heavy week</div></div>
+        <div class="price"><div class="pages">31–50 pages</div><div class="amt">R150</div><div class="note">Whole-module crunch</div></div>
+      </div>
+      <p class="price-foot">📦 Over 50 pages or super technical? You'll get a custom quote before paying — no surprises.<br>
+      ✈️ <b>Airport rides:</b> drivers usually charge around <b>R195–R260</b> for a Stellenbosch ↔ Cape Town International trip, but the exact fare is agreed <b>directly with your chosen driver</b>. SU-Go doesn't set or handle ride payments.</p>
+    </div>
+  </section>
+
+  <!-- HOW (uses campus-steps.jpg) -->
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head"><span class="kick">How it works</span><h2>Simple. Every time.</h2></div>
+      <div class="steps">
+        <div class="step"><div class="n"></div><h4>Sign up</h4><p>Create your account with your student number — student-only space.</p></div>
+        <div class="step"><div class="n"></div><h4>Choose a tool</h4><p>Notes, a study plan, or an airport ride. Fill in the details.</p></div>
+        <div class="step"><div class="n"></div><h4>We connect you</h4><p>Notes &amp; plans come to us; ride requests go to your driver.</p></div>
+        <div class="step"><div class="n"></div><h4>Sorted</h4><p>Get your notes/plan back, or confirm your ride with the driver.</p></div>
+      </div>
+      <div style="text-align:center;margin-top:44px">
+        <button class="btn btn-gold" onclick="openAuth('register')">Start now — free to sign up</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-col" style="max-width:360px">
+          <h4>SU-Go</h4>
+          <p>The student-only notes, study &amp; airport-link hub for Stellenbosch University. Built to give you your time back.</p>
+        </div>
+        <div class="foot-col">
+          <!-- EDIT YOUR DETAILS -->
+          <b>SU-Go HQ</b>
+          <div class="line">A HopeVision Innovations project</div>
+          <div class="line">Director: <b id="directorName">Ngambla</b></div>
+          <div class="line">📱 WhatsApp: <b>+27 72 150 1937</b></div>
+          <div class="line">✉️ bd072375@gmail.com</div>
+        </div>
+        <div class="foot-col">
+          <b>Need help?</b>
+          <div class="line">Assistance line</div>
+          <div class="line">📱 <b>+266 63301566</b></div>
+          <div class="line">✉️ 27376516@sun.ac.za</div>
+        </div>
+      </div>
+      <p class="disclaimer">
+        <b>Airport rides — please read:</b> SU-Go is a free introduction service that connects students with fellow students who are willing to drive to the airport. SU-Go is <b>not a transport operator</b>, does not employ or formally vet drivers, does not own vehicles, and does not set or collect ride fares. Any ride, fare and arrangement is made <b>directly between you and the driver</b>, at your own discretion and risk. This is a voluntary student-to-student arrangement — a choice given by a student, to a student, for a student — and is not a commercial taxi or e-hailing service. Please use your own judgement, confirm your driver's details, check that they are properly licensed and insured, and share your trip plans with someone you trust.
+      </p>
+      <p class="foot-bottom">© <span id="yr"></span> SU-Go · HopeVision Innovations · For Stellenbosch University students.</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== DASHBOARD ===================== -->
+<div id="dash">
+  <div class="dash-top">
+    <div class="wrap nav-inner">
+      <a href="#" class="brand"><img src="logo.png" alt="SU-Go" onerror="this.style.display='none'">SU-<b>Go</b></a>
+      <div style="display:flex;align-items:center;gap:18px">
+        <div class="dash-hi">Hey <b id="userName">there</b> 👋</div>
+        <button class="btn btn-ghost" onclick="logout()">Log out</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-body">
+    <div class="wrap">
+      <div class="dash-tabs" id="dashTabs">
+        <button class="on" data-tab="notes" onclick="dashTab('notes')">📚 Notes</button>
+        <button data-tab="plan" onclick="dashTab('plan')">🗓️ Study Plan</button>
+        <button data-tab="ride" onclick="dashTab('ride')">✈️ Airport Ride</button>
+        <button data-tab="admin" id="adminTabBtn" class="hidden" onclick="dashTab('admin')">⚙️ Admin</button>
+      </div>
+
+      <!-- NOTES -->
+      <div class="panel" id="panel-notes">
+        <h2>Crush My Notes</h2>
+        <p class="pdesc">Drop your notes, tell us how you want them, hit send. We'll reply with a price &amp; banking details.</p>
+        <div class="drop" id="dropZone"><div class="big">📥</div><p><b>Tap to upload</b> or drag your notes here</p><p style="font-size:.82rem;margin-top:4px">PDF, Word, images — as many as you like</p><input type="file" id="fileInput" multiple style="display:none" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.txt,.ppt,.pptx"></div>
+        <div class="filelist" id="fileList"></div>
+        <div style="margin-top:24px">
+          <label style="display:block;font-size:.82rem;font-weight:600;color:var(--maroon);margin-bottom:8px">How do you want them? (pick one)</label>
+          <div class="style-grid" id="styleGrid">
+            <div class="style-opt" data-style="Short & Sharp"><b>⚡ Short &amp; Sharp</b><span>Just the essentials, bullet TL;DR.</span></div>
+            <div class="style-opt sel" data-style="Detailed but Digestible"><b>📖 Detailed but Digestible</b><span>Thorough, but plain &amp; easy.</span></div>
+            <div class="style-opt" data-style="Exam-Cram Mode"><b>🎯 Exam-Cram Mode</b><span>Key defs, formulas, likely Qs.</span></div>
+            <div class="style-opt" data-style="Structured / Visual"><b>🗂️ Structured / Visual</b><span>Headings, tables, mind-map style.</span></div>
+          </div>
+        </div>
+        <div class="field" style="margin-top:22px"><label>Module / subject (optional)</label><input type="text" id="notesModule" placeholder="e.g. Microeconomics 221"></div>
+        <div class="field"><label>Anything else we should know?</label><textarea id="notesMsg" rows="2" placeholder="e.g. focus on chapters 3–5, exam is Friday"></textarea></div>
+        <div class="confid"><span class="lock">🔒</span><div><b>Your stuff stays private.</b> Your notes go straight to our director — never posted publicly, never shared with other students.</div></div>
+        <div id="notesFeedback"></div>
+        <button class="btn btn-gold btn-block" id="notesSubmit" onclick="submitNotes()">Send my notes →</button>
+      </div>
+
+      <!-- PLAN -->
+      <div class="panel hidden" id="panel-plan">
+        <h2>Plan My Grind</h2>
+        <p class="pdesc">Tell us what you're studying and how you like to work. We'll build a realistic schedule with proper breaks.</p>
+        <div class="drop" id="dropZonePlan"><div class="big">🗓️</div><p><b>Upload your timetable</b> (optional)</p><p style="font-size:.82rem;margin-top:4px">A photo of your lecture schedule helps</p><input type="file" id="fileInputPlan" multiple style="display:none" accept=".pdf,.png,.jpg,.jpeg,.docx"></div>
+        <div class="filelist" id="fileListPlan"></div>
+        <div class="field" style="margin-top:22px"><label>What are you studying / which modules?</label><textarea id="planSubjects" rows="2" placeholder="e.g. Finance, Accounting, Public Law"></textarea></div>
+        <div class="row2">
+          <div class="field"><label>Focus per session</label><select id="planFocus"><option>25 min (Pomodoro)</option><option selected>45 min</option><option>1 hour</option><option>1.5 hours</option><option>2 hours</option></select></div>
+          <div class="field"><label>Hours per day</label><select id="planHours"><option>2 hours</option><option selected>4 hours</option><option>6 hours</option><option>8 hours</option></select></div>
+        </div>
+        <div class="field"><label>When are your exams / deadlines?</label><input type="text" id="planExam" placeholder="e.g. exams start 20 June"></div>
+        <div id="planFeedback"></div>
+        <button class="btn btn-gold btn-block" id="planSubmit" onclick="submitPlan()">Build my schedule →</button>
+      </div>
+
+      <!-- RIDE -->
+      <div class="panel hidden" id="panel-ride">
+        <h2>Ride to the Airport ✈️</h2>
+        <p class="pdesc">Set your details, pick a driver, and we'll link you up. You arrange the fare and final plan directly with your driver.</p>
+        <div class="notice"><span>ℹ️</span><div><b>How this works:</b> SU-Go just introduces you to a fellow student driver. We don't run the transport or handle the money — the ride and fare are agreed directly between you and your driver. Travel at your own discretion, and always confirm the driver's details first.</div></div>
+
+        <div class="row2">
+          <div class="field"><label>Your full name</label><input type="text" id="rideName" placeholder="Your name"></div>
+          <div class="field"><label>Your WhatsApp number</label><input type="tel" id="rideWa" placeholder="e.g. 072 123 4567"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>Travel date</label><input type="date" id="rideDate"></div>
+          <div class="field"><label>Pickup location</label><input type="text" id="ridePickup" placeholder="e.g. Stellenbosch, Bosman St"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>Flight time</label><input type="time" id="rideFlight" onchange="airportTip()"></div>
+          <div class="field"><label>Passengers + bags</label><input type="text" id="ridePax" placeholder="e.g. 1 person, 2 bags"></div>
+        </div>
+        <div id="airportTip" style="font-size:.88rem;color:var(--maroon);background:#fbf2e1;border:1px solid #ecd9ad;border-radius:10px;padding:11px 14px;margin-bottom:6px;display:none"></div>
+        <div class="field"><label>Upload student card (optional — for your driver's peace of mind)</label><input type="file" id="rideCard" accept=".png,.jpg,.jpeg,.pdf"></div>
+
+        <label style="display:block;font-size:.82rem;font-weight:600;color:var(--maroon);margin:18px 0 8px">Choose your driver</label>
+        <div class="driver-list" id="driverList"></div>
+
+        <div id="rideFeedback" style="margin-top:18px"></div>
+        <button class="btn btn-gold btn-block" id="rideSubmit" onclick="submitRide()" style="margin-top:8px">Request this ride →</button>
+      </div>
+
+      <!-- ADMIN -->
+      <div class="panel hidden" id="panel-admin">
+        <h2>Admin</h2>
+        <p class="pdesc">Registered students &amp; your current driver list. (In this v1, student accounts are stored per-browser — see your developer's upgrade note.)</p>
+        <h3 style="color:var(--maroon);margin:10px 0">👥 Students</h3>
+        <div id="adminList"></div>
+        <h3 style="color:var(--maroon);margin:26px 0 10px">🚗 Drivers on the site</h3>
+        <div id="adminDrivers"></div>
+        <p style="font-size:.85rem;color:#7a5c60;margin-top:10px">To add or remove a driver, edit the <b>const DRIVERS</b> list in the code and re-upload to Netlify. (Your developer can show you, or wire a proper editor later.)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== AUTH MODAL ===================== -->
+<div class="overlay hidden" id="authOverlay">
+  <div class="modal">
+    <button class="x" onclick="closeAuth()">×</button>
+    <div class="tabs"><button id="tabLogin" class="on" onclick="switchAuth('login')">Log in</button><button id="tabReg" onclick="switchAuth('register')">Sign up</button></div>
+    <div id="loginForm">
+      <h2>Welcome back 👋</h2><p class="sub">Log in to use any of the tools.</p>
+      <div id="loginMsg"></div>
+      <div class="field"><label>Student number or email</label><input type="text" id="loginId" placeholder="e.g. 26012345 or you@sun.ac.za"></div>
+      <div class="field"><label>Password</label><input type="password" id="loginPass" placeholder="Your password"></div>
+      <button class="btn btn-gold btn-block" onclick="doLogin()">Log in</button>
+      <p class="small-link" onclick="switchAuth('register')">New here? Create an account</p>
+    </div>
+    <div id="regForm" class="hidden">
+      <h2>Join SU-Go</h2><p class="sub">Student-only. Takes 30 seconds.</p>
+      <div id="regMsg"></div>
+      <div class="field"><label>Full name</label><input type="text" id="regName" placeholder="Your name"></div>
+      <div class="field"><label>Student number</label><input type="text" id="regStudent" placeholder="e.g. 26012345"></div>
+      <div class="field"><label>Email</label><input type="email" id="regEmail" placeholder="you@sun.ac.za"></div>
+      <div class="field"><label>WhatsApp number</label><input type="tel" id="regWa" placeholder="e.g. 072 123 4567"></div>
+      <div class="field"><label>Create a password</label><input type="password" id="regPass" placeholder="Min 6 characters"></div>
+      <button class="btn btn-gold btn-block" onclick="doRegister()">Create account</button>
+      <p class="small-link" onclick="switchAuth('login')">Already have an account? Log in</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   1) CONFIG — EDIT THESE
+   ========================================================= */
+const WEB3FORMS_KEY = "ec01ebdf-b77f-4745-8c5f-dd36c4359164";  // free key from web3forms.com (create it with bd072375@gmail.com)
+const ADMIN_EMAIL    = "bd072375@gmail.com";   // the email YOU log in with as admin
+const ADMIN_PASSWORD = "Tsepo@2026";        // CHANGE this before going live!
+const MY_WHATSAPP    = "27721501937";          // your SA WhatsApp, intl format, no + or spaces
+
+/* =========================================================
+   2) YOUR AIRPORT DRIVERS — add / remove freely
+      phone = WhatsApp number in international format, no + or spaces
+      (SA numbers start 27, drop the leading 0:  072... -> 2772...)
+      photo (optional) = an image filename in this folder, else initials show
+   ========================================================= */
+const DRIVERS = [
+  { name:"Mantutle",  car:"Toyota Corolla", rating:"4.9", phone:"27721501937", note:"Mornings & weekends", photo:"" },
+  { name:"Mia",   car:"Hyundai i30",    rating:"4.8", phone:"27710000002", note:"Flexible, Mon–Fri",   photo:"" },
+  { name:"Jason", car:"VW Polo",        rating:"4.9", phone:"27710000003", note:"Evenings & early AM",  photo:"" },
+];
+
+/* =========================================================
+   SAFE STORAGE (localStorage live; memory fallback in preview)
+   ========================================================= */
+const _mem={};
+const store={get(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):(_mem[k]??null);}catch(e){return _mem[k]??null;}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){_mem[k]=v;}}};
+const getUsers=()=>store.get('sugo_users')||[]; const setUsers=u=>store.set('sugo_users',u);
+const setSession=id=>store.set('sugo_session',id); const getSession=()=>store.get('sugo_session'); const clearSession=()=>store.set('sugo_session',null);
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+/* AUTH */
+function openAuth(m){document.getElementById('authOverlay').classList.remove('hidden');switchAuth(m);}
+function closeAuth(){document.getElementById('authOverlay').classList.add('hidden');clearMsgs();}
+function switchAuth(m){const l=m==='login';document.getElementById('loginForm').classList.toggle('hidden',!l);document.getElementById('regForm').classList.toggle('hidden',l);document.getElementById('tabLogin').classList.toggle('on',l);document.getElementById('tabReg').classList.toggle('on',!l);clearMsgs();}
+function clearMsgs(){['loginMsg','regMsg'].forEach(i=>document.getElementById(i).innerHTML='');}
+function showMsg(id,t,x){document.getElementById(id).innerHTML=`<div class="msg ${t}">${x}</div>`;}
+function val(id){return document.getElementById(id).value.trim();}
+function scramble(s){return btoa(unescape(encodeURIComponent(s))).split('').reverse().join('');}
+
+function doRegister(){
+  const name=val('regName'),student=val('regStudent'),email=val('regEmail').toLowerCase(),wa=val('regWa'),pass=val('regPass');
+  if(!name||!student||!email||!pass)return showMsg('regMsg','err','Please fill in all required fields.');
+  if(pass.length<6)return showMsg('regMsg','err','Password must be at least 6 characters.');
+  let users=getUsers();
+  if(users.some(u=>u.email===email||u.student===student))return showMsg('regMsg','err','An account with that email or student number already exists. Try logging in.');
+  users.push({name,student,email,wa,pass:scramble(pass),joined:new Date().toISOString()});
+  setUsers(users);setSession(email);enterDash();
+}
+function doLogin(){
+  const id=val('loginId').toLowerCase(),pass=val('loginPass');
+  if(!id||!pass)return showMsg('loginMsg','err','Enter your details to log in.');
+  if(id===ADMIN_EMAIL.toLowerCase()&&pass===ADMIN_PASSWORD){setSession(ADMIN_EMAIL.toLowerCase());enterDash();return;}
+  const u=getUsers().find(x=>x.email===id||x.student===id||x.student===id.toUpperCase());
+  if(!u)return showMsg('loginMsg','err','No account found. Check your details or sign up.');
+  if(u.pass!==scramble(pass))return showMsg('loginMsg','err','Wrong password. Try again.');
+  setSession(u.email);enterDash();
+}
+function logout(){clearSession();document.getElementById('dash').style.display='none';document.getElementById('site').style.display='block';window.scrollTo(0,0);}
+function currentUser(){const s=getSession();if(!s)return null;if(s===ADMIN_EMAIL.toLowerCase())return{name:'Director (Admin)',email:s,admin:true};return getUsers().find(u=>u.email===s)||null;}
+function enterDash(){const u=currentUser();if(!u){logout();return;}closeAuth();document.getElementById('site').style.display='none';document.getElementById('dash').style.display='block';document.getElementById('userName').textContent=u.name.split(' ')[0];const a=!!u.admin;document.getElementById('adminTabBtn').classList.toggle('hidden',!a);dashTab(a?'admin':'notes');if(a)renderAdmin();if(!a){document.getElementById('rideName').value=u.name;document.getElementById('rideWa').value=u.wa||'';}window.scrollTo(0,0);}
+
+function dashTab(tab){['notes','plan','ride','admin'].forEach(t=>document.getElementById('panel-'+t).classList.toggle('hidden',t!==tab));document.querySelectorAll('#dashTabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));if(tab==='ride')renderDrivers();}
+function esc(s){return(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+function renderAdmin(){
+  const users=getUsers(),box=document.getElementById('adminList');
+  box.innerHTML=users.length?users.map(u=>`<div class="admin-user"><div><b>${esc(u.name)}</b> · ${esc(u.student)}<br><span style="color:#7a5c60;font-size:.85rem">${esc(u.email)} · ${esc(u.wa||'—')}</span></div><div style="color:#7a5c60;font-size:.82rem">${new Date(u.joined).toLocaleDateString()}</div></div>`).join(''):'<p style="color:#7a5c60">No students registered on this device yet.</p>';
+  document.getElementById('adminDrivers').innerHTML=DRIVERS.map(d=>`<div class="admin-user"><div><b>${esc(d.name)}</b> · ${esc(d.car)} · ⭐${esc(d.rating)}<br><span style="color:#7a5c60;font-size:.85rem">📱 ${esc(d.phone)} · ${esc(d.note||'')}</span></div></div>`).join('');
+}
+
+/* DRIVERS render + select */
+let chosenDriver=null;
+function initials(n){return n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();}
+function renderDrivers(){
+  const box=document.getElementById('driverList');
+  box.innerHTML=DRIVERS.map((d,i)=>{
+    const av=d.photo?`style="background-image:url('${esc(d.photo)}')"`:'';
+    return `<div class="driver" data-i="${i}" onclick="pickDriver(${i})">
+      <div class="avatar" ${av}>${d.photo?'':initials(d.name)}</div>
+      <div class="info"><b>${esc(d.name)}</b><span>${esc(d.car)} · ⭐ ${esc(d.rating)} · ${esc(d.note||'')}</span></div>
+      <div class="pick">Choose</div></div>`;
+  }).join('');
+}
+function pickDriver(i){chosenDriver=i;document.querySelectorAll('#driverList .driver').forEach(el=>el.classList.toggle('sel',+el.dataset.i===i));document.querySelectorAll('#driverList .pick').forEach((el,idx)=>el.textContent=idx===i?'Selected ✓':'Choose');}
+
+/* airport timing tip */
+function airportTip(){
+  const ft=document.getElementById('rideFlight').value;const box=document.getElementById('airportTip');
+  if(!ft){box.style.display='none';return;}
+  const [h,m]=ft.split(':').map(Number);let t=h*60+m-180;if(t<0)t+=1440;
+  const lh=String(Math.floor(t/60)%24).padStart(2,'0'),lm=String(t%60).padStart(2,'0');
+  box.style.display='block';
+  box.innerHTML=`✈️ For a flight at <b>${ft}</b>, aim to be picked up around <b>${lh}:${lm}</b> (≈3 hrs before, traffic depending). Tell your driver this so you're not rushing.`;
+}
+
+/* FILE UPLOAD */
+function wireDrop(z,inp,ls,b){const zone=document.getElementById(z),input=document.getElementById(inp),list=document.getElementById(ls);zone.addEventListener('click',()=>input.click());['dragover','dragenter'].forEach(e=>zone.addEventListener(e,ev=>{ev.preventDefault();zone.classList.add('drag');}));['dragleave','drop'].forEach(e=>zone.addEventListener(e,ev=>{ev.preventDefault();zone.classList.remove('drag');}));zone.addEventListener('drop',ev=>addFiles(ev.dataTransfer.files,b,list));input.addEventListener('change',()=>addFiles(input.files,b,list));}
+const files={notes:[],plan:[]};
+function addFiles(fl,b,list){for(const f of fl)files[b].push(f);renderFiles(b,list);}
+function renderFiles(b,list){list.innerHTML=files[b].map((f,i)=>`<div class="fileitem"><span>📄 ${esc(f.name)} <span style="color:#9a7b80">(${(f.size/1024).toFixed(0)} KB)</span></span><button onclick="rmFile('${b}',${i},'${list.id}')">×</button></div>`).join('');}
+function rmFile(b,i,id){files[b].splice(i,1);renderFiles(b,document.getElementById(id));}
+wireDrop('dropZone','fileInput','fileList','notes');
+wireDrop('dropZonePlan','fileInputPlan','fileListPlan','plan');
+
+let chosenStyle="Detailed but Digestible";
+document.querySelectorAll('#styleGrid .style-opt').forEach(o=>o.addEventListener('click',()=>{document.querySelectorAll('#styleGrid .style-opt').forEach(x=>x.classList.remove('sel'));o.classList.add('sel');chosenStyle=o.dataset.style;}));
+
+/* SUBMIT helpers */
+async function sendToWeb3(fd,fbId,btn,okText){
+  const fb=document.getElementById(fbId);
+  if(WEB3FORMS_KEY.includes("YOUR-WEB3FORMS")){fb.innerHTML=`<div class="msg err">⚠️ Setup needed: add your free Web3Forms key in the code first. (See your setup guide.)</div>`;return false;}
+  btn.disabled=true;const old=btn.textContent;btn.textContent="Sending…";
+  try{const r=await fetch("https://api.web3forms.com/submit",{method:"POST",body:fd});const d=await r.json();if(d.success){fb.innerHTML=`<div class="msg ok">${okText}</div>`;btn.textContent="Sent ✓";return true;}throw 0;}
+  catch(e){fb.innerHTML=`<div class="msg err">Couldn't send right now. Please try again, or WhatsApp us directly.</div>`;btn.disabled=false;btn.textContent=old;return false;}
+}
+async function submitNotes(){
+  const u=currentUser();if(!u)return;const fb=document.getElementById('notesFeedback');
+  if(!files.notes.length){fb.innerHTML=`<div class="msg err">Please upload at least one file first.</div>`;return;}
+  const fd=new FormData();fd.append("access_key",WEB3FORMS_KEY);fd.append("subject",`📚 NEW NOTES — ${u.name} (${chosenStyle})`);fd.append("from_name","SU-Go Website");
+  fd.append("Student",`${u.name} · ${u.student}`);fd.append("Email",u.email);fd.append("WhatsApp",u.wa||'—');fd.append("Summary style",chosenStyle);fd.append("Module",val('notesModule')||'—');fd.append("Notes",val('notesMsg')||'—');
+  files.notes.forEach((f,i)=>fd.append("attachment_"+i,f));
+  await sendToWeb3(fd,'notesFeedback',document.getElementById('notesSubmit'),"🎉 Got it! Your notes are with us. We'll send a price + banking details shortly. Pay, and your summary lands back with you.");
+}
+async function submitPlan(){
+  const u=currentUser();if(!u)return;
+  const fd=new FormData();fd.append("access_key",WEB3FORMS_KEY);fd.append("subject",`🗓️ NEW SCHEDULE — ${u.name}`);fd.append("from_name","SU-Go Website");
+  fd.append("Student",`${u.name} · ${u.student}`);fd.append("Email",u.email);fd.append("WhatsApp",u.wa||'—');fd.append("Subjects",val('planSubjects')||'—');fd.append("Focus per session",val('planFocus'));fd.append("Hours per day",val('planHours'));fd.append("Exams/deadlines",val('planExam')||'—');
+  files.plan.forEach((f,i)=>fd.append("attachment_"+i,f));
+  await sendToWeb3(fd,'planFeedback',document.getElementById('planSubmit'),"🎉 Sent! We'll put your study plan together and send it through. Watch your WhatsApp/email.");
+}
+
+/* RIDE submit -> email you + WhatsApp the driver */
+function waLink(phone,msg){return `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;}
+async function submitRide(){
+  const u=currentUser();if(!u)return;const fb=document.getElementById('rideFeedback');
+  const name=val('rideName'),wa=val('rideWa'),date=val('rideDate'),pickup=val('ridePickup'),flight=val('rideFlight'),pax=val('ridePax');
+  if(chosenDriver===null)return fb.innerHTML=`<div class="msg err">Please choose a driver first.</div>`;
+  if(!name||!date||!pickup)return fb.innerHTML=`<div class="msg err">Please fill in your name, travel date and pickup location.</div>`;
+  const d=DRIVERS[chosenDriver];
+  const fd=new FormData();fd.append("access_key",WEB3FORMS_KEY);fd.append("subject",`✈️ RIDE REQUEST — ${name} -> driver ${d.name}`);fd.append("from_name","SU-Go Website");
+  fd.append("Student",`${u.name} · ${u.student}`);fd.append("Student WhatsApp",wa||u.wa||'—');fd.append("Chosen driver",`${d.name} (${d.car}) · ${d.phone}`);fd.append("Travel date",date);fd.append("Pickup",pickup);fd.append("Flight time",flight||'—');fd.append("Passengers/bags",pax||'—');
+  const card=document.getElementById('rideCard').files[0];if(card)fd.append("student_card",card);
+  const ok=await sendToWeb3(fd,'rideFeedback',document.getElementById('rideSubmit'),`✅ Request logged! Now tap the green button below to send it to ${esc(d.name)} on WhatsApp — they'll confirm with you directly.`);
+  if(ok){
+    const driverMsg=`Hi ${d.name}! 👋 SU-Go ride request:\n\nStudent: ${name}\nDate: ${date}\nPickup: ${pickup}\nFlight time: ${flight||'n/a'}\nPassengers/bags: ${pax||'n/a'}\nMy WhatsApp: ${wa||u.wa||'(ask me)'}\n\nAre you available for this trip? Thanks!`;
+    const adminMsg=`SU-Go ride booked:\nStudent: ${name} (${u.student})\nDriver: ${d.name} (${d.phone})\nDate: ${date} · Flight ${flight||'n/a'}\nPickup: ${pickup}`;
+    document.getElementById('rideFeedback').innerHTML+=`<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+      <a class="btn btn-wa" href="${waLink(d.phone,driverMsg)}" target="_blank">📲 Message ${esc(d.name)} on WhatsApp</a>
+      <a class="btn btn-ghost" style="color:var(--maroon);border-color:var(--maroon)" href="${waLink(MY_WHATSAPP,adminMsg)}" target="_blank">Send a copy to SU-Go</a></div>`;
+  }
+}
+
+/* auto-login */
+if(getSession()&&currentUser())enterDash();
+</script>
+</body>
+</html>
