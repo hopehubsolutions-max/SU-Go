@@ -655,14 +655,14 @@ async function submitNotes(){
   if(!files.notes.length){fb.innerHTML=`<div class="msg err">Please upload at least one file first.</div>`;return;}
   const fd=new FormData();fd.append("access_key",WEB3FORMS_KEY);fd.append("subject",`📚 NEW NOTES — ${u.name} (${chosenStyle})`);fd.append("from_name","SU-Go Website");
   fd.append("Student",`${u.name} · ${u.student}`);fd.append("Email",u.email);fd.append("WhatsApp",u.wa||'—');fd.append("Summary style",chosenStyle);fd.append("Module",val('notesModule')||'—');fd.append("Notes",val('notesMsg')||'—');
-  files.notes.forEach((f,i)=>fd.append("attachment_"+i,f));
+  files.notes.forEach(f=>fd.append("attachment",f));
   await sendToWeb3(fd,'notesFeedback',document.getElementById('notesSubmit'),"🎉 Got it! Your notes are with us. We'll send a price + banking details shortly. Pay, and your summary lands back with you.");
 }
 async function submitPlan(){
   const u=currentUser();if(!u)return;
   const fd=new FormData();fd.append("access_key",WEB3FORMS_KEY);fd.append("subject",`🗓️ NEW SCHEDULE — ${u.name}`);fd.append("from_name","SU-Go Website");
   fd.append("Student",`${u.name} · ${u.student}`);fd.append("Email",u.email);fd.append("WhatsApp",u.wa||'—');fd.append("Subjects",val('planSubjects')||'—');fd.append("Focus per session",val('planFocus'));fd.append("Hours per day",val('planHours'));fd.append("Exams/deadlines",val('planExam')||'—');
-  files.plan.forEach((f,i)=>fd.append("attachment_"+i,f));
+  files.plan.forEach(f=>fd.append("attachment",f));
   await sendToWeb3(fd,'planFeedback',document.getElementById('planSubmit'),"🎉 Sent! We'll put your study plan together and send it through. Watch your WhatsApp/email.");
 }
 
@@ -676,7 +676,7 @@ async function submitRide(){
   const d=DRIVERS[chosenDriver];
   const fd=new FormData();fd.append("access_key",WEB3FORMS_KEY);fd.append("subject",`✈️ RIDE REQUEST — ${name} -> driver ${d.name}`);fd.append("from_name","SU-Go Website");
   fd.append("Student",`${u.name} · ${u.student}`);fd.append("Student WhatsApp",wa||u.wa||'—');fd.append("Chosen driver",`${d.name} (${d.car}) · ${d.phone}`);fd.append("Travel date",date);fd.append("Pickup",pickup);fd.append("Flight time",flight||'—');fd.append("Passengers/bags",pax||'—');
-  const card=document.getElementById('rideCard').files[0];if(card)fd.append("student_card",card);
+  const card=document.getElementById('rideCard').files[0];if(card)fd.append("attachment",card);
   const ok=await sendToWeb3(fd,'rideFeedback',document.getElementById('rideSubmit'),`✅ Request logged! Now tap the green button below to send it to ${esc(d.name)} on WhatsApp — they'll confirm with you directly.`);
   if(ok){
     const driverMsg=`Hi ${d.name}! 👋 SU-Go ride request:\n\nStudent: ${name}\nDate: ${date}\nPickup: ${pickup}\nFlight time: ${flight||'n/a'}\nPassengers/bags: ${pax||'n/a'}\nMy WhatsApp: ${wa||u.wa||'(ask me)'}\n\nAre you available for this trip? Thanks!`;
