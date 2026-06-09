@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SU-Go · Notes, Plans &amp; Airport Rides — for Maties</title>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <!-- ============================================================
      SU-GO  ·  v1   ·   by HopeVision Innovations
      ------------------------------------------------------------
@@ -12,7 +12,10 @@
        WEB3FORMS_KEY   -> ec01ebdf-b77f-4745-8c5f-dd36c4359164
        ADMIN_EMAIL     -> nuttymantutle2@gmail.com
        ADMIN_PASSWORD  -> Tsepo123#
-       MY_WHATSAPP     -> +26663301566
+       MY_WHATSAPP     -> 26663301566
+     const SUPABASE_URL = "https://vllhbilnbbqhpjhmkroz.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZsbGhiaWxuYmJxaHBqaG1rcm96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NTU4NDMsImV4cCI6MjA5NjUzMTg0M30.ufja_9Z689pBBqnq-j1c2UjAjIWz1iCupNcLqI2KJFY";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
        const DRIVERS   -> add / remove your airport drivers here
        PRICES          -> the numbers in the pricing section
      IMAGES used (keep these files in the SAME folder as this page):
@@ -653,10 +656,44 @@ async function sendToWeb3(fd,fbId,btn,okText){
 async function submitNotes(){
   const u=currentUser();if(!u)return;const fb=document.getElementById('notesFeedback');
   if(!files.notes.length){fb.innerHTML=`<div class="msg err">Please upload at least one file first.</div>`;return;}
-  const fd=new FormData();fd.append("access_key",WEB3FORMS_KEY);fd.append("subject",`📚 NEW NOTES — ${u.name} (${chosenStyle})`);fd.append("from_name","SU-Go Website");
-  fd.append("Student",`${u.name} · ${u.student}`);fd.append("Email",u.email);fd.append("WhatsApp",u.wa||'—');fd.append("Summary style",chosenStyle);fd.append("Module",val('notesModule')||'—');fd.append("Notes",val('notesMsg')||'—');
-  files.notes.forEach(f=>fd.append("attachment",f));
-  await sendToWeb3(fd,'notesFeedback',document.getElementById('notesSubmit'),"🎉 Got it! Your notes are with us. We'll send a price + banking details shortly. Pay, and your summary lands back with you.");
+  const btn=document.getElementById('notesSubmit');btn.disabled=true;const old=btn.textContent;btn.textContent="Sending…";fb.innerHTML='';
+  try{
+    const stamp=Date.now();
+    const folder=`${(u.student||'student').replace(/[^a-zA-Z0-9]/g,'')}_${stamp}`;
+    const paths=[];
+    for(const f of files.notes){
+      const safe=f.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+      const path=`${folder}/${safe}`;
+      const {error}=await sb.storage.from('notes').upload(path,f);
+      if(error)throw error;
+      paths.push(path);
+    }
+    const {error:dberr}=await sb.from('submissions').insert([{name:u.name,student:u.student,email:u.email,whatsapp:u.wa||'',style:chosenStyle,module:val('notesModule')||'',note:val('notesMsg')||'',file_path:paths.join(', ')}]);
+    if(dberr)throw dberr;
+    if(!WEB3FORMS_KEY.includes('YOUR-WEB3FORMS')){
+      const fd=new FormData();fd.append('access_key',WEB3FORMS_KEY);fd.append('subject',`📚 NEW NOTES — ${u.name} (${chosenStyle})`);fd.append('from_name','SU-Go Website');
+      fd.append('Student',`${u.name} · ${u.student}`);fd.append('Email',u.email);fd.append('WhatsApp',u.wa||'—');fd.append('Summary style',chosenStyle);fd.append('Module',val('notesModule')||'—');fd.append('Note',val('notesMsg')||'—');fd.append('Files',paths.join(', '));
+      fetch('https://api.web3forms.com/submit',{method:'POST',body:fd}).catch(()=>{});
+    }
+    files.notes=[];renderFiles('notes',document.getElementById('fileList'));
+    document.getElementById('notesModule').value='';document.getElementById('notesMsg').value='';
+    btn.textContent="Sent ✓";showQueuePopup();
+  }catch(e){
+    fb.innerHTML=`<div class="msg err">Couldn't upload: ${esc(e.message||'error')}. Please try again.</div>`;
+    btn.disabled=false;btn.textContent=old;
+  }
+}
+function showQueuePopup(){
+  const d=document.createElement('div');d.className='overlay';
+  d.innerHTML=`<div class="modal" style="text-align:center;max-width:470px">
+    <div style="font-size:2.8rem;margin-bottom:6px">📚</div>
+    <h2 style="font-size:1.8rem;color:var(--maroon)">Got it — your notes are in the queue.</h2>
+    <p style="font-size:1.08rem;color:#5a3b3f;margin:16px 0 8px;line-height:1.65">Good notes take time. Our team reviews every submission carefully, usually within <b style="color:var(--maroon)">12–48 hours</b> depending on traffic.</p>
+    <p style="font-size:1.08rem;color:#5a3b3f;margin-bottom:24px">Sit back and relax — <b style="color:var(--maroon)">we'll be in touch soon.</b> ✨</p>
+    <button class="btn btn-gold btn-block" onclick="this.closest('.overlay').remove()">Got it 👍</button>
+  </div>`;
+  document.body.appendChild(d);
+}
 }
 async function submitPlan(){
   const u=currentUser();if(!u)return;
