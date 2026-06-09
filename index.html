@@ -647,7 +647,7 @@ async function sendToWeb3(fd,fbId,btn,okText){
   const fb=document.getElementById(fbId);
   if(WEB3FORMS_KEY.includes("YOUR-WEB3FORMS")){fb.innerHTML=`<div class="msg err">⚠️ Setup needed: add your free Web3Forms key in the code first. (See your setup guide.)</div>`;return false;}
   btn.disabled=true;const old=btn.textContent;btn.textContent="Sending…";
-  try{const r=await fetch("https://api.web3forms.com/submit",{method:"POST",body:fd});const d=await r.json();if(d.success){fb.innerHTML=`<div class="msg ok">${okText}</div>`;btn.textContent="Sent ✓";return true;}throw 0;}
+  try{const r=await fetch("https://api.web3forms.com/submit",{method:"POST",body:fd});const d=await r.json();if(d.success){fb.innerHTML=`<div class="msg ok">${okText}</div>`;btn.textContent="Sent ✓";return true;}fb.innerHTML=`<div class="msg err">Couldn't send: ${esc(d.message||'unknown error')}. Try again or WhatsApp us.</div>`;btn.disabled=false;btn.textContent=old;return false;}
   catch(e){fb.innerHTML=`<div class="msg err">Couldn't send right now. Please try again, or WhatsApp us directly.</div>`;btn.disabled=false;btn.textContent=old;return false;}
 }
 async function submitNotes(){
