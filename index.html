@@ -694,7 +694,6 @@ function showQueuePopup(){
   </div>`;
   document.body.appendChild(d);
 }
-}
 async function submitPlan(){
   const u=currentUser();if(!u)return;
   const fd=new FormData();fd.append("access_key",WEB3FORMS_KEY);fd.append("subject",`🗓️ NEW SCHEDULE — ${u.name}`);fd.append("from_name","SU-Go Website");
